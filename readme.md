@@ -4,7 +4,7 @@
 
 This project is web-site of University schedule implemented on Spring Java framework. He enables check schedule of lessons for students and teachers online and edit schedule for admin.
 
-## Functional requirements
+## FUNCTIONAL REQUIREMENTS
 
 ### Users Managment
 - User can be sign up on the site using his university email, password, full name
@@ -29,4 +29,12 @@ This project is web-site of University schedule implemented on Spring Java frame
 - Admin can add and remove new groups, specialties, faculties, lessons and teachers
 - Admin can change a time schedule(times of start lessons)
 - Admin can duplicate a schedule for the next weeks
-- 
+
+## REST API AND SYSTEM BEHAVIOURS
+
+
+
+
+
+
+
