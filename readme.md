@@ -6,7 +6,7 @@ This project is web-site of University schedule implemented on Spring Java frame
 
 ## Functional requirements
 
-### User Managment
+### Users Managment
 - User can be sign up on the site using his university email, password, full name
 - User must specify your faculty, couse, specialty and group if you are student and faculty if are teacher
 - User must log in to use schedule using email and password
@@ -25,5 +25,8 @@ This project is web-site of University schedule implemented on Spring Java frame
 - Admin can restore password
 - Admin can log out
 - Main admin can add and remove admin account
-
-
+- Admin can add page of schedule or edit existing
+- Admin can add and remove new groups, specialties, faculties, lessons and teachers
+- Admin can change a time schedule(times of start lessons)
+- Admin can duplicate a schedule for the next weeks
+- 
