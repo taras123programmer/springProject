@@ -84,3 +84,5 @@ Administration:
 - PUTCH /admin/groups - Edit a existing student group
 
 
+## ER-diagram
+![ER-diagram]()
