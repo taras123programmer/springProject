@@ -38,19 +38,20 @@ This project includes the following functional requirements
 
 ### Get schedule
 For student:
-
-- GET /schedule/student/week?faculty={faculty_short_name}&?specialty={specialty_name}?corse={number_of_course}?group={number_of_group}:
-  Get catalog of schedule for this week(for a student)
-- GET /schedule/week: Get schedule catalog on this week for delault user group(if he's authorized)
-- GET /schedule/week?next={number_of_weeks} - Get schedule catalog on n-th week after this
-- GET /schedule/week?last={number_of_weeks} - Get schedule catalog on n-th week before this
-- GET /schedule/week?date={date} - Get schedule catalog which inlcludes selected date
-- GET /schedule/day?group={group_id}&date={date}: Get page of schedule for the selected group_id on the selected date
-- GET /schedule/day?group={group_id}: Get page of schedule for the selected group_id on this date
+- GET /group?faculty={faculty_short_name}&specialty={specialty_name}&course={number_of_course}&group={number_of_group}:
+  Select the student group by faculty, specialty, course and number_of_group and get group id
+- GET /schedule/student/week: Get schedule catalog on this week for delault user group(if he's authorized)
+- GET /schedule/student/week?group={group_id}: Get schedule catalog on this week for specified group
+- GET /schedule/student/week?date={date} - Get schedule catalog for week which inlcludes selected date
+- GET /schedule/student/week/next(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the next week(or on the n-th week after this, optional)
+- GET /schedule/student/week/last(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the last week(or on the n-th week before this, optional)
+- GET /schedule/student/day(?group={group_id}&date={date}): Get page of schedule for the selected group_id on the selected date(by defalult is today date and default user group)
 
 For teacher:
-- GET /schedule
-
+- GET /teacher?name={name}&surname={surname}: Find teacher by name and surname and get teacher_id
+- GET /schedule/teacher - Get schedule of teacher on today(Only if user is teacher)
+- GET /schedule/teacher?id={teacher_id} - Get teacher schedule by teacher id
+- 
 
 
 
