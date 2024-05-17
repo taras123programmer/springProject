@@ -30,11 +30,7 @@ This project includes the following functional requirements
 - Admin can change a time schedule(times of start lessons)
 - Admin can duplicate a schedule for the next weeks
 
-## SYSTEM BEHAVIOUR
-
-- User interact with the system througth web interface
-
-## REST API
+## SYSTEM BEHAVIOUR AND REST API
 
 ### Get schedule
 For student:
