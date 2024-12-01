@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
-    Group getBySpecialtyAndNumberAndCourse(String specialty, int number, int course);
-
     boolean existsById(int id);
+
+    Group getBySpecialtyAndCourseAndNumber(String specialty, int course, int number);
 
 }

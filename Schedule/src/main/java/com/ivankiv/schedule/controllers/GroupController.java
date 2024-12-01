@@ -23,7 +23,7 @@ public class GroupController {
 
     @GetMapping("groupId")
     public ResponseEntity<Integer> getGroupId(@RequestParam String specialty, @RequestParam int course, @RequestParam int number) throws EntityNotFoundException {
-        int id = service.getGroupId(new GroupDTO(specialty, number, course));
+        int id = service.getGroupId(specialty, course, number);
         return ResponseEntity.status(HttpStatus.OK).body(id);
     }
 

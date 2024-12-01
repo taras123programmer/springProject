@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вибрати групу</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <#if notFoundGroup?? && notFoundGroup>
+        <div class="error-message" id="error-message">Такої групи не знайдено!</div>
+    </#if>
+
+    <form action="" method="GET">
+        <p>Введіть назву групи:</p>
+        <input type="text" name="group" placeholder="Назва групи">
+        <button type="submit">Підтвердити</button>
+    </form>
+</body>
+</html>

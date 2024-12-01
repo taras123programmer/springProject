@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="/css/schedule_styles.css">
+    <script>
+        function selectDate(){
+             const selectedDate = document.getElementById('date-picker').value;
+
+             if(selectedDate){
+                window.location.href = "/web/schedule?groupId=${groupId}&date="+selectedDate;
+             }
+        }
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <a class="day-btn" href="/web/schedule?groupId=${groupId}&date=${lastWeek}">Минулий тиждень</a>
+        <a class="today-btn" href="/web/schedule?groupId=${groupId}&date=${today}">Сьогодні</a>
+        <a class="day-btn" href="/web/schedule?groupId=${groupId}&date=${nextWeek}">Наступний тиждень</a>
+        <a class="change-group-btn" href="/web/group">Змінити групу</a>
+        <input type="date" class="date-picker" id="date-picker" onchange="selectDate()" value="${date}">
+    </div>
+
+    <div class="week">
+        <a class="day-btn <#if dayOfWeek == 1>active</#if>" href="/web/schedule?groupId=${groupId}&date=${days[0]}">Понеділок</a>
+        <a class="day-btn <#if dayOfWeek == 2>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[1]}">Вівторок</a>
+        <a class="day-btn <#if dayOfWeek == 3>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[2]}">Середа</a>
+        <a class="day-btn <#if dayOfWeek == 4>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[3]}">Четвер</a>
+        <a class="day-btn <#if dayOfWeek == 5>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[4]}">П'ятниця</a>
+        <a class="day-btn <#if dayOfWeek == 6>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[5]}">Субота</a>
+        <a class="day-btn <#if dayOfWeek == 7>active</#if>"  href="/web/schedule?groupId=${groupId}&date=${days[6]}">Неділя</a>
+    </div>
+
+    <div class="Schedule">
+        <#if holiday?? && holiday>
+        <h3>Похоже, що у вас вихідний!</h3>
+        <#else>
+        <#list lessons as n, lesson>
+        <div class="Lesson">
+            <p class="lesson-time">${n} пара (${lesson.begin()}-${lesson.begin().plusMinutes(90)})</p>
+            <p class="subject">${lesson.object()}</p>
+            <p class="teacher">Викладач: ${lesson.teacher()}</p>
+            <p class="group">${group}</p>
+            <p class="location">${lesson.address()}, ${lesson.corps()}, ${lesson.cabinet()}</p>
+        </div>
+        </#list>
+    </#if>
+    </div>
+</div>
+</body>
+
+
+</html>

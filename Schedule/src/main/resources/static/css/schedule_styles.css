@@ -1,0 +1,180 @@
+/* Загальні стилі для сторінки */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основний контейнер */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Стилі для заголовка */
+.header {
+    display: flex;
+    justify-content: flex-start; /* Вирівнюємо елементи по лівому краю */
+    width: 80%;
+    margin-bottom: 10px; /* Зменшено відступи */
+    padding: 10px 0;
+    margin-left: 50px; /* Зменшено відступ зліва */
+}
+
+/* Кнопка "Сьогодні" */
+.today-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Трохи більший розмір кнопки */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Трохи більший шрифт */
+    transition: background-color 0.3s;
+    margin: 0 4px; /* Менший відступ між кнопками */
+    text-decoration: none;
+}
+
+.today-btn:hover {
+    background-color: #218838;
+}
+
+/* Кнопка "Змінити групу" */
+.change-group-btn {
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Трохи більший розмір кнопки */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Трохи більший шрифт */
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.change-group-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Поле для вибору дати */
+.date-picker {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px; /* Поле залишилося незмінним */
+    margin-left: auto; /* Поле дати зсунуте вправо */
+}
+
+/* Стилі для тижня */
+.week {
+    display: flex;
+    justify-content: space-between;
+    width: 70%; /* Трохи ширше */
+    margin-bottom: 10px; /* Зменшено відступи */
+    padding: 5px 0;
+}
+
+.day-btn {
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px; /* Більший шрифт */
+    padding: 10px 15px; /* Збільшено ширину та висоту кнопок */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    width: 13%; /* Ширші кнопки */
+    margin: 0 4px; /* Менші відступи між кнопками */
+    text-decoration: none;
+}
+
+.day-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Виділений день тижня */
+.day-btn.active {
+    background-color: #28a745;
+    font-weight: bold;
+}
+
+/* Стилі для розкладу */
+.Schedule {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Трохи менший внутрішній відступ */
+}
+
+.Lesson {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0; /* Зменшено вертикальні відступи між уроками */
+    line-height: 1.6; /* Трохи зменшено міжрядковий інтервал */
+}
+
+.Lesson:last-child {
+    border-bottom: none;
+}
+
+.lesson-time {
+    font-weight: bold;
+    color: #007BFF;
+    font-size: 18px; /* Трохи менший шрифт */
+    margin-bottom: 8px; /* Зменшено відступ */
+}
+
+.subject {
+    font-size: 18px; /* Трохи менший шрифт */
+    margin: 6px 0; /* Зменшено вертикальні відступи */
+    font-weight: bold;
+}
+
+.teacher, .group, .location {
+    font-size: 16px; /* Трохи менший шрифт */
+    margin: 6px 0; /* Трохи менший відступ між рядками */
+    color: #555;
+}
+
+.teacher {
+    font-style: italic;
+}
+
+.location {
+    color: #777;
+}
+
+/* Мобільні адаптивні стилі */
+@media (max-width: 768px) {
+    .week {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Schedule {
+        padding: 10px; /* Зменшено внутрішній відступ */
+    }
+
+    .Lesson {
+        padding: 10px 0;
+    }
+
+    .week .day-btn {
+        width: auto;
+        margin-bottom: 8px; /* Зменшено відступи для кнопок на мобільних пристроях */
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

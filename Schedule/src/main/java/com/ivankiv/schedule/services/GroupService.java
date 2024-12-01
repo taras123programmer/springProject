@@ -19,8 +19,8 @@ public class GroupService {
         this.repository = r;
     }
 
-    public int getGroupId(GroupDTO dto) throws EntityNotFoundException {
-        Group group = repository.getBySpecialtyAndNumberAndCourse(dto.specialty(), dto.number(), dto.course());
+    public int getGroupId(String specialty, int course, int number) throws EntityNotFoundException {
+        Group group = repository.getBySpecialtyAndCourseAndNumber(specialty, course, number);
         if(group == null) throw new EntityNotFoundException();
         return group.id;
     }

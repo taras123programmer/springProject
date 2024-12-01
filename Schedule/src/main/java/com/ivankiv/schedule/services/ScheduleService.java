@@ -45,11 +45,19 @@ public class ScheduleService {
     }
 
     public ScheduleDTO EntityToDTO(Schedule entity) {
-        ScheduleDTO dto = new ScheduleDTO(entity.date, entity.groupId, new TreeMap<Integer, LessonDTO>());
+        String group = entity.group.specialty + '-' + entity.group.number;
+        ScheduleDTO dto = new ScheduleDTO(entity.date, group, new TreeMap<Integer, LessonDTO>());
         for(LessonSchedule ls : entity.lessonSchedules) {
             Lesson lesson = ls.lesson;
-            LessonDTO lessonDTO = new LessonDTO(lesson.object, lesson.teacher.surname, lesson.corps.name,
-                    lesson.corps.getAddress(), lesson.cabinet, types.get(lesson.type - 1), ls.lessonBegin.begin);
+            LessonDTO lessonDTO = new LessonDTO(
+                    lesson.object,
+                    (lesson.teacher.name + ' ' + lesson.teacher.surname),
+                    lesson.corps.name,
+                    lesson.corps.getAddress(),
+                    lesson.cabinet,
+                    types.get(lesson.type - 1),
+                    ls.lessonBegin.begin.toLocalTime()
+            );
             dto.lessons().put(ls.number(), lessonDTO);
         }
         return dto;
