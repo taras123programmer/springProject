@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/admin_styles.css">
+</head>
+
+<body>
+<#include "admin_panel_header.html">
+
+<div class="form-container">
+<#if error??>
+    <div class="error">${error}</div>
+</#if>
+<#if success??>
+    <div class="success">${success}</div>
+</#if>
+</div>
+
+</body>
+</html>

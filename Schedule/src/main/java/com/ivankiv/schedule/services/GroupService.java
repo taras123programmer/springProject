@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class GroupService {
@@ -23,6 +25,21 @@ public class GroupService {
         Group group = repository.getBySpecialtyAndCourseAndNumber(specialty, course, number);
         if(group == null) throw new EntityNotFoundException();
         return group.id;
+    }
+
+    public int getGroupId(String group) throws  EntityNotFoundException{
+        Pattern p = Pattern.compile("([\\u0400-\\u04FF]+)-((\\d)\\d)");
+        Matcher m = p.matcher(group);
+        if(m.find()) {
+            String specialty = m.group(1);
+            int groupNumber = Integer.parseInt(m.group(2));
+            int groupCourse = Integer.parseInt(m.group(3));
+
+            return getGroupId(specialty, groupCourse, groupNumber);
+        }
+        else{
+            throw new EntityNotFoundException();
+        }
     }
 
     public Group getGroupById(int id) throws EntityNotFoundException {

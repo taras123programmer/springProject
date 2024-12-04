@@ -1,0 +1,18 @@
+<header>
+    <form class="header__form" method="get">
+        <div class="header__fields">
+            <label class="header__label" for="group">Група:</label>
+            <input class="header__input" id="group" type="text" name="group" <#if group??>value="${group}"</#if> required>
+
+            <label class="header__label" for="date">Дата:</label>
+            <input class="header__input" id="date" type="date" name="date" <#if date??>value="${date}"</#if> required>
+        </div>
+        <div class="header__buttons">
+            <button class="header__button" type="submit" formaction="/web/admin/select">Переглянути</button>
+            <button class="header__button" type="submit" formaction="/web/admin/create">Створити</button>
+            <button class="header__button" type="submit" formaction="/web/admin/update">Оновити</button>
+            <button class="header__button" type="submit" formaction="/web/admin/edit">Редагувати</button>
+            <button class="header__button" type="submit" formaction="/web/admin/delete">Видалити</button>
+        </div>
+    </form>
+</header>

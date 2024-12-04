@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/admin_styles.css">
+    <link rel="stylesheet" href="/css/schedule_styles.css">
+</head>
+<body>
+<#include "admin_panel_header.html">
+<div class="container">
+    <div class="Schedule">
+            <#if notFoundGroup?? && notFoundGroup>
+                <div class="error">Такої групи не існує!</div>
+            <#elseif notFoundSchedule?? && notFoundSchedule>
+                <div class="error">Розклад не знайдено!</div>
+            <#else>
+                <#list lessons as n, lesson>
+                <div class="Lesson">
+                    <p class="lesson-time">${n} пара (${lesson.begin()}-${lesson.begin().plusMinutes(90)})</p>
+                    <p class="subject">${lesson.object()}</p>
+                    <p class="subject">${lesson.type()}</p>
+                    <p class="teacher">Викладач: ${lesson.teacher()}</p>
+                    <p class="group">${group}</p>
+                    <p class="location">${lesson.address()}, ${lesson.corps()}, ${lesson.cabinet()}</p>
+                </div>
+                </#list>
+            </#if>
+    </div>
+</div>
+</body>
+</html>

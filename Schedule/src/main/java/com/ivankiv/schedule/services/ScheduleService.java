@@ -9,7 +9,9 @@ import com.ivankiv.schedule.entities.LessonSchedule;
 import com.ivankiv.schedule.entities.Schedule;
 import com.ivankiv.schedule.exceptions.BadRequestException;
 import com.ivankiv.schedule.exceptions.EntityNotFoundException;
-import com.ivankiv.schedule.repositories.*;
+import com.ivankiv.schedule.repositories.GroupRepository;
+import com.ivankiv.schedule.repositories.LessonBeginRepository;
+import com.ivankiv.schedule.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +24,7 @@ public class ScheduleService {
 
     private final ScheduleRepository repository;
     private final LessonService lessonService;
-    //private final LessonScheduleRepository lessonScheduleRepository;
     private final LessonBeginRepository lessonBeginRepository;
-    //private final LessonRepository lessonRepository;
     private final GroupRepository groupRepository;
     private final ArrayList<String> types = new ArrayList<>(Arrays.asList("Лекція", "Практична", "Екзамен", "Семінар"));
 
@@ -33,10 +33,8 @@ public class ScheduleService {
                            ScheduleRepository repository, GroupService groupService, LessonService lessonService) {
         this.repository = repository;
         this.lessonService = lessonService;
-        //this.lessonScheduleRepository = lessonScheduleRepository;
         this.lessonBeginRepository = lessonBeginRepository;
         this.groupRepository = groupRepository;
-        //this.lessonRepository = lessonRepository;
     }
 
     public ScheduleDTO get(int group_id, LocalDate date) throws EntityNotFoundException {
@@ -66,6 +64,10 @@ public class ScheduleService {
     @Transactional
     public Schedule save(Schedule schedule) throws BadRequestException {
             return repository.save(schedule);
+    }
+
+    public boolean exists(int groupId, LocalDate date){
+        return repository.existsByGroupIdAndDate(groupId, date);
     }
 
     @Transactional
@@ -102,7 +104,6 @@ public class ScheduleService {
             throw new EntityNotFoundException("Such a schedule does not exist!");
         }
     }
-
 
     public void remove(int groupId, LocalDate date) throws EntityNotFoundException {
         Schedule schedule = getSchedule(groupId, date);

@@ -153,6 +153,11 @@ body {
     color: #777;
 }
 
+.type{
+    font-size: 18px;
+    margin: 4px 0;
+}
+
 /* Мобільні адаптивні стилі */
 @media (max-width: 768px) {
     .week {

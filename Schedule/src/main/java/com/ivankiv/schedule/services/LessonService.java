@@ -1,6 +1,7 @@
 package com.ivankiv.schedule.services;
 
 import com.ivankiv.schedule.dto.LessonRequest;
+import com.ivankiv.schedule.dto.LessonWebDTO;
 import com.ivankiv.schedule.entities.Lesson;
 import com.ivankiv.schedule.exceptions.BadRequestException;
 import com.ivankiv.schedule.repositories.CorpsRepository;
@@ -34,6 +35,9 @@ public class LessonService {
         this.corpsRepository = corpsRepository;
     }
 
+    public Integer getTeacherId(String faculty, String surname, String name){
+        return teacherRepository.findIdByFacultyAndNameAndSurname(faculty, name, surname);
+    }
 
     public boolean isTeacherExists(int teacher_id) {
         return teacherRepository.existsById(teacher_id);
@@ -73,6 +77,11 @@ public class LessonService {
         else {
             throw new BadRequestException("Invalid lesson type!");
         }
+    }
+
+    public LessonWebDTO getLessonWebDTO(int n, Lesson l){
+        return new LessonWebDTO(n, l.object, l.teacher.faculty, l.teacher.name, l.teacher.surname, l.teacher.id,
+                l.corpsId, l.cabinet, types.get(l.type - 1));
     }
 
     public void delete(Lesson lesson) {

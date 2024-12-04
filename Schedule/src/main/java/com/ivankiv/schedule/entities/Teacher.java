@@ -13,6 +13,7 @@ public class Teacher {
     public String name;
     public String surname;
     public String patronymic;
+    public String faculty;
 
     public Teacher(int id){
         this.id = id;
