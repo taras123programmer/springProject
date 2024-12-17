@@ -7,6 +7,15 @@ This project is web-site of University schedule implemented on Spring Java frame
 This project includes the following functional requirements
 
 ### Users Managment
+# University schedule project
+
+This project is web-site of University schedule implemented on Spring Java framework. He enables check schedule of lessons for students and teachers online and edit schedule for admin.
+
+## FUNCTIONAL REQUIREMENTS
+
+This project includes the following functional requirements
+
+### Users Managment
 - User can be sign up on the site using his university email, password, full name
 - User must specify your faculty, couse, specialty and group if you are student and faculty if are teacher
 - User must log in to use schedule using email and password
@@ -15,9 +24,15 @@ This project includes the following functional requirements
 - User can log out
 
 ### Using schedule
+- User can log out
+
+### Using schedule
 - User have delault schedule but he can see schedule for other group or teacher
 - User can select date(by default is today date) he wants get schedule
 - User can go to next or previous day schedule
+- User can go to next or previous week schedule
+
+### administration
 - User can go to next or previous week schedule
 
 ### administration
@@ -33,7 +48,14 @@ This project includes the following functional requirements
 ## SYSTEM BEHAVIOUR AND REST API
 
 ### Get schedule
+- Admin can duplicate a schedule for the next weeks
+
+## SYSTEM BEHAVIOUR AND REST API
+
+### Get schedule
 For student:
+- GET /group?faculty={faculty_short_name}&specialty={specialty_name}&course={number_of_course}&group={number_of_group}:
+  Select the student group by faculty, specialty, course and number_of_group and get group id
 - GET /group?faculty={faculty_short_name}&specialty={specialty_name}&course={number_of_course}&group={number_of_group}:
   Select the student group by faculty, specialty, course and number_of_group and get group id
 - GET /schedule/student/week: Get schedule catalog on this week for delault user group(if he's authorized)
@@ -41,6 +63,9 @@ For student:
 - GET /schedule/student/week?date={date} - Get schedule catalog for week which inlcludes selected date
 - GET /schedule/student/week/next(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the next week(or on the n-th week after this, optional)
 - GET /schedule/student/week/last(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the last week(or on the n-th week before this, optional)
+- GET /schedule/student/day(?group={group_id}&date={date}): Get page of schedule for the selected group_id on the selected date(by defalult is today date and default user group)
+
+For teacher:
 - GET /schedule/student/day(?group={group_id}&date={date}): Get page of schedule for the selected group_id on the selected date(by defalult is today date and default user group)
 
 For teacher:
@@ -55,12 +80,18 @@ For teacher:
 - GET /schedule/teacher/day(?id={teacher_id}&date={date}): Get page of schedule for the selected teacher_id on the selected date(by defalult is today date)
 
 Account:
+- GET /schedule/teacher/day(?id={teacher_id}&date={date}): Get page of schedule for the selected teacher_id on the selected date(by defalult is today date)
+
+Account:
 - POST /sign_up - Registration new user(student or teacher)
 - POST /log_in - Authorization in the system as simple user
 - GET /profile - View your user profile
 - GET /log_out - Exit from system
 - POST /restore - Restore password using your email
 - GET /restore/confirmation?code={secret_code} - Confirm the user via secret code which had come to the mail
+- POST /restore/new_password - Set new password after successed confirmation
+
+Administration:
 - POST /restore/new_password - Set new password after successed confirmation
 
 Administration:
@@ -81,4 +112,4 @@ Administration:
 
 
 ## ER-diagram
-![ER-diagram](https://github.com/programmer123pro/springProject/blob/main/screenshot.png)
+![ER-diagram](https://github.com/programmer123pro/springProject/ERD.png)
