@@ -16,31 +16,21 @@ public class ScheduleWebController {
 
     private final GroupService groupService;
     private final ScheduleService scheduleService;
+    private final String[] faculties = {"Факультет математики та інформатики", "Фізико-технічний факультет",
+            "Факультет іноземних мов", "Факультет фізичної культури", "Факультет історії та права"};
 
     public ScheduleWebController(GroupService groupService, ScheduleService scheduleService){
         this.groupService = groupService;
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/")
-    public String index(){
-        return "select_group";
-    }
+    @GetMapping({"/", "/web/group"})
+    public String selectGroup(Model model){
+        model.addAttribute("faculties", faculties);
+        String date = LocalDate.now().toString();
+        model.addAttribute("date", date);
 
-    @GetMapping("/web/group")
-    public String selectGroup(@RequestParam(required = false) String group, Model model) throws EntityNotFoundException {
-        if(group == null){
         return "select_group";
-        }
-        try {
-            int groupId = groupService.getGroupId(group);
-            String date = LocalDate.now().toString();
-            return String.format("redirect:/web/schedule?groupId=%d&date=%s", groupId, date);
-        }
-        catch (EntityNotFoundException e) {
-            model.addAttribute("notFoundGroup", true);
-            return "select_group";
-        }
     }
 
     @GetMapping("/web/schedule")

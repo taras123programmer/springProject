@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/group")
@@ -22,8 +24,8 @@ public class GroupController {
     }
 
     @GetMapping("groupId")
-    public ResponseEntity<Integer> getGroupId(@RequestParam String specialty, @RequestParam int course, @RequestParam int number) throws EntityNotFoundException {
-        int id = service.getGroupId(specialty, course, number);
+    public ResponseEntity<Integer> getGroupId(@RequestParam String group) throws EntityNotFoundException {
+        int id = service.getGroupId(group);
         return ResponseEntity.status(HttpStatus.OK).body(id);
     }
 
@@ -37,6 +39,12 @@ public class GroupController {
     public ResponseEntity<GroupDTO> addGroup(@RequestBody GroupDTO groupDTO){
         GroupDTO g = service.addGroup(groupDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(g);
+    }
+
+    @GetMapping("groups")
+    public ResponseEntity<List<GroupDTO>> getGroupList(@RequestParam String faculty, @RequestParam int course){
+        List<GroupDTO> groups = service.getGroupList(faculty, course);
+        return ResponseEntity.status(HttpStatus.OK).body(groups);
     }
 
 

@@ -4,11 +4,13 @@ import com.ivankiv.schedule.dto.ScheduleDTO;
 import com.ivankiv.schedule.dto.ScheduleRequest;
 import com.ivankiv.schedule.exceptions.BadRequestException;
 import com.ivankiv.schedule.exceptions.EntityNotFoundException;
+import com.ivankiv.schedule.services.AdminDetailsService;
 import com.ivankiv.schedule.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.ivankiv.schedule.JwtUntil;
 
 import java.time.LocalDate;
 
@@ -17,10 +19,14 @@ import java.time.LocalDate;
 public class ScheduleController {
 
     private final ScheduleService service;
+    private final AdminDetailsService adminDetailsService;
+    private final JwtUntil jwtUntil;
 
     @Autowired
-    ScheduleController(ScheduleService scheduleService){
+    ScheduleController(ScheduleService scheduleService, AdminDetailsService adminDetailsService, JwtUntil jwtUntil){
         this.service = scheduleService;
+        this.jwtUntil = jwtUntil;
+        this.adminDetailsService = adminDetailsService;
     }
 
     @GetMapping

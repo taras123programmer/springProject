@@ -5,16 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вибрати групу</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script>
+
+        let faculty;
+        let course;
+
+        function selectFaculty(){
+            select_faculty = document.getElementById('faculty');
+            faculty = select_faculty.value;
+            fetchGroupList();
+        }
+
+        function selectCourse(){
+            select_course =  document.getElementById('course');
+            course = select_course.value;
+            fetchGroupList();
+        }
+
+        function fetchGroupList(){
+            if(course && faculty){
+                const params = new URLSearchParams();
+                params.append('faculty', faculty);
+                params.append('course', course);
+                let group_list = [];
+
+                fetch('/api/group/groups?'+params.toString())
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    let group_list = [];
+                    for(const group of data){
+                        group_list.push(group.specialty + '-' + group.number);
+                    }
+                    addGroups(group_list);
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            }
+        }
+
+        function addGroups(group_list){
+                select_group = document.getElementById('group');
+                select_group.innerHTML = '';
+                for(group of group_list){
+                    new_option = document.createElement('option');
+                    new_option.value = group;
+                    new_option.textContent = group;
+                    select_group.appendChild(new_option);
+                }
+            }
+
+        function submit(){
+        group = document.getElementById('group').value;
+        if(group){
+        fetch('/api/group/groupId?group='+group)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(id => {
+                url = "/web/schedule?groupId="+id+"&date=${date}";
+                window.location.href = "/web/schedule?groupId="+ id+"&date=${date}";
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            }
+        }
+
+    </script>
 </head>
 <body>
     <#if notFoundGroup?? && notFoundGroup>
         <div class="error-message" id="error-message">Такої групи не знайдено!</div>
     </#if>
 
-    <form action="/web/group" method="GET">
-        <p>Введіть назву групи:</p>
-        <input type="text" name="group" placeholder="Назва групи" required>
-        <button type="submit">Підтвердити</button>
+    <form autocomplete="off">
+        <p>Виберіть групу:</p>
+        <p>
+        <select id="faculty"  onchange="selectFaculty()" required>
+            <option value="" selected disabled>Оберіть факультет</option>
+            <#list faculties as f>
+                <option value="${f}">${f}</option>
+            </#list>
+        </select>
+        </p>
+        <p>
+        <select id="course" required onchange="selectCourse()">
+            <option value="" selected disabled>Оберіть курс</option>
+            <option value=1>1 курс</option>
+            <option value=2>2 курс</option>
+            <option value=3>3 курс</option>
+            <option value=4>4 курс</option>
+        </select>
+            </p>
+        <p>
+            <select id="group" required></select>
+        </p>
     </form>
+<button type="button" onclick="submit()">Підтвердити</button>
 </body>
 </html>

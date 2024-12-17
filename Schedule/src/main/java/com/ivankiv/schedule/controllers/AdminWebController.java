@@ -137,7 +137,7 @@ public class AdminWebController {
             lesson.teacher_id = teacherId;
             lessons.put(lesson.number, lesson);
             numbers.remove( (Integer)(lesson.number) );
-            if(oldNumber != null){
+            if(oldNumber != null && oldNumber != lesson.number){
                 lessons.remove(oldNumber);
             }
         }

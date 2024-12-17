@@ -2,14 +2,18 @@ package com.ivankiv.schedule.services;
 
 import com.ivankiv.schedule.dto.GroupDTO;
 import com.ivankiv.schedule.entities.Group;
-import com.ivankiv.schedule.repositories.GroupRepository;
 import com.ivankiv.schedule.exceptions.EntityNotFoundException;
+import com.ivankiv.schedule.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+;
 
 @Service
 public class GroupService {
@@ -25,6 +29,15 @@ public class GroupService {
         Group group = repository.getBySpecialtyAndCourseAndNumber(specialty, course, number);
         if(group == null) throw new EntityNotFoundException();
         return group.id;
+    }
+
+    public List<GroupDTO> getGroupList(String faculty, int course){
+        List<Group> groups = repository.findAllByFacultyAndCourse(faculty, course);
+        List<GroupDTO> res = new ArrayList<>();
+        for(Group g : groups){
+            res.add(entityToDTO(g));
+        }
+        return res;
     }
 
     public int getGroupId(String group) throws  EntityNotFoundException{

@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +15,10 @@ import java.util.List;
 public class AdminDetailsService implements UserDetailsService {
 
     private final AdminRepository repository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminDetailsService(AdminRepository repository, PasswordEncoder passwordEncoder) {
+    public AdminDetailsService(AdminRepository repository) {
         this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -32,7 +29,7 @@ public class AdminDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 admin.getUsername(),
                 admin.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))  // Ви можете додавати ролі на основі вашої логіки
+                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
         );
     }
 
