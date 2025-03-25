@@ -112,4 +112,4 @@ Administration:
 
 
 ## ER-diagram
-![ER-diagram](https://github.com/programmer123pro/springProject/ERD.png)
+![ER-diagram](https://github.com/taras123programmer/springProject/ERD.png)
