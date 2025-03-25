@@ -24,17 +24,11 @@ This project includes the following functional requirements
 - User can log out
 
 ### Using schedule
-- User can log out
-
-### Using schedule
 - User have delault schedule but he can see schedule for other group or teacher
 - User can select date(by default is today date) he wants get schedule
 - User can go to next or previous day schedule
 - User can go to next or previous week schedule
-
-### administration
-- User can go to next or previous week schedule
-
+- 
 ### administration
 - Admin can log in on the site using email
 - Admin can restore password
@@ -43,11 +37,6 @@ This project includes the following functional requirements
 - Admin can add page of schedule or edit existing
 - Admin can add and remove new groups, specialties, faculties, lessons and teachers
 - Admin can change a time schedule(times of start lessons)
-- Admin can duplicate a schedule for the next weeks
-
-## SYSTEM BEHAVIOUR AND REST API
-
-### Get schedule
 - Admin can duplicate a schedule for the next weeks
 
 ## SYSTEM BEHAVIOUR AND REST API
@@ -89,9 +78,6 @@ Account:
 - GET /log_out - Exit from system
 - POST /restore - Restore password using your email
 - GET /restore/confirmation?code={secret_code} - Confirm the user via secret code which had come to the mail
-- POST /restore/new_password - Set new password after successed confirmation
-
-Administration:
 - POST /restore/new_password - Set new password after successed confirmation
 
 Administration:
