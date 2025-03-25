@@ -3,7 +3,7 @@ package com.ivankiv.schedule.Services;
 import com.ivankiv.schedule.DTO.GroupDTO;
 import com.ivankiv.schedule.Entities.Group;
 import com.ivankiv.schedule.Repositories.GroupRepository;
-import com.ivankiv.schedule.Exceptions.EntityNotFoundException;;
+import com.ivankiv.schedule.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
