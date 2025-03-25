@@ -1,152 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link rel="stylesheet" href="/css/admin_styles.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+        <link rel="stylesheet" href="/css/admin_styles.css">
+    </head>
 
-<body>
-<#include "admin_panel_header.html">
+    <body>
+    <#include "admin_panel_header.html">
 
-<main>
-    <div class="form-container">
-        <#if exists?? && exists>
-        <div class="error">Такий розклад вже існує!</div>
-        <#else>
-        <div class="form-action-buttons" style="margin-bottom:20px;">
-            <form method="get">
-                <button class="btn save-btn" type="submit" formaction="${method}/save">Зберегти</button>
-                <button class="btn delete-btn" type="submit" formaction="cancel">Скасувати</button>
-            </form>
-        </div>
-        <div class="form-content">
-        <#if lessons??>
-            <#if invalidTeacher?? && invalidTeacher>
-            <div class="error">Такого викладача немає!</div>
-            </#if>
-        <#list lessons as lesson>
-        <form action="" method="post" class="lesson-form" id="${lesson.number()}">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <div class="form-group">
-                <label class="form-label">Номер пари:</label>
-                <input type="hidden" name="old_number" value=${lesson.number()}>
-                <select class="form-select short-select" name="number" required>
-                    <option value=${lesson.number()}>${lesson.number()} пара</option>
-                    <#list numbers as n>
-                        <option value="${n}"<#if n == lesson.number()> selected</#if>>${n} пара</option>
-                    </#list>
-                </select>
+    <main>
+        <div class="form-container">
+            <#if exists?? && exists>
+            <div class="error">Такий розклад вже існує!</div>
+            <#else>
+            <div class="form-action-buttons" style="margin-bottom:20px;">
+                <form method="get">
+                    <button class="btn save-btn" type="submit" formaction="${method}/save">Зберегти</button>
+                    <button class="btn delete-btn" type="submit" formaction="cancel">Скасувати</button>
+                </form>
             </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label class="form-label">Предмет:</label>
-            <input class="form-input" type="text" name="subject" value="${lesson.subject()}" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">Формат:</label>
-            <select class="form-select" name="type" required>
-                <option value="Лекція"<#if lesson.type() == "Лекція"> selected</#if>>Лекція</option>
-            <option value="Практична"<#if lesson.type() == "Практична"> selected</#if>>Практична</option>
-        <option value="Екзамен"<#if lesson.type() == "Екзамен"> selected</#if>>Екзамен</option>
-    <option value="Семінар"<#if lesson.type() == "Семінар"> selected</#if>>Семінар</option>
-</select>
-</div>
-</div>
-
-<div class="teacher-fields ">
-    <div class="form-label">Викладач:</div>
-    <div class="form-row">
-        <div class="form-group">
-            <label class="form-label">Ім'я:</label>
-            <input class="form-input" type="text" name="teacher_name" value="${lesson.teacher_name()}" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">Прізвище:</label>
-            <input class="form-input" type="text" name="teacher_surname" value="${lesson.teacher_surname()}" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Факультет:</label>
-        <select class="form-select" name="teacher_faculty" required>
-            <#list faculties as f>
-            <option value="${f}"<#if f == lesson.teacher_faculty()> selected</#if>>${f}</option>
-            </#list>
+            <div class="form-content">
+            <#if lessons??>
+                <#if invalidTeacher?? && invalidTeacher>
+                <div class="error">Такого викладача немає!</div>
+                </#if>
+            <#list lessons as lesson>
+            <form action="" method="post" class="lesson-form" id="${lesson.number()}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <label class="form-label">Номер пари:</label>
+                    <input type="hidden" name="old_number" value=${lesson.number()}>
+                    <select class="form-select short-select" name="number" required>
+                        <option value=${lesson.number()}>${lesson.number()} пара</option>
+                        <#list numbers as n>
+                            <option value="${n}"<#if n == lesson.number()> selected</#if>>${n} пара</option>
+                        </#list>
+                    </select>
+                </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Предмет:</label>
+                <input class="form-input" type="text" name="subject" value="${lesson.subject()}" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Формат:</label>
+                <select class="form-select" name="type" required>
+                    <option value="Лекція"<#if lesson.type() == "Лекція"> selected</#if>>Лекція</option>
+                <option value="Практична"<#if lesson.type() == "Практична"> selected</#if>>Практична</option>
+            <option value="Екзамен"<#if lesson.type() == "Екзамен"> selected</#if>>Екзамен</option>
+        <option value="Семінар"<#if lesson.type() == "Семінар"> selected</#if>>Семінар</option>
     </select>
     </div>
-</div>
-
-<div class="form-row">
-    <div class="form-group">
-        <label class="form-label">Корпус:</label>
-        <select class="form-select" name="corps" required>
-            <option value=1<#if lesson.corps() == 1> selected</#if>>Центральний корпус</option>
-            <option value=2<#if lesson.corps() == 2> selected</#if>>Гуманітарний корпус</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label class="form-label">Аудиторія:</label>
-        <input class="form-input" type="number" name="cabinet" value="${lesson.cabinet()}" required>
-    </div>
-</div>
-<div class="form-action-buttons">
-    <button class="btn save-btn small-save-btn" formaction="add">Зберегти</button>
-    </form>
-    <form method="get">
-        <input type="hidden" name="n" value="${lesson.number()}">
-        <button class="btn delete-btn" formaction="remove">Видалити</button>
-    </form>
-</div>
-</#list>
-</#if>
-
-<form action="" method="post" class="lesson-form">
-    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-    <div class="form-row">
-    <div class="form-group">
-        <label class="form-label">Номер пари:</label>
-        <select class="form-select short-select" name="number" required>
-            <#list numbers as n>
-            <option value=${n}>${n} пара</option>
-        </#list>
-        </select>
-    </div></div>
-    <div class="form-row">
-        <div class="form-group">
-            <label class="form-label">Предмет:</label>
-            <input class="form-input" type="text" name="subject" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">Формат:</label>
-            <select class="form-select" name="type" required>
-                <option value="Лекція">Лекція</option>
-                <option value="Практична">Практична</option>
-                <option value="Екзамен">Екзамен</option>
-                <option value="Семінар">Семінар</option>
-            </select>
-        </div>
     </div>
 
-    <div class="teacher-fields">
-    <div class="form-label">Викладач:</div>
-    <div class="form-row">
-        <div class="form-group">
-            <label class="form-label">Ім'я:</label>
-            <input class="form-input" type="text" name="teacher_name" required>
+    <div class="teacher-fields ">
+        <div class="form-label">Викладач:</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Ім'я:</label>
+                <input class="form-input" type="text" name="teacher_name" value="${lesson.teacher_name()}" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Прізвище:</label>
+                <input class="form-input" type="text" name="teacher_surname" value="${lesson.teacher_surname()}" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="form-label">Прізвище:</label>
-            <input class="form-input" type="text" name="teacher_surname" required>
-        </div>
-    </div>
         <div class="form-group">
             <label class="form-label">Факультет:</label>
             <select class="form-select" name="teacher_faculty" required>
                 <#list faculties as f>
-                <option value="${f}">${f}</option>
-            </#list>
-            </select>
+                <option value="${f}"<#if f == lesson.teacher_faculty()> selected</#if>>${f}</option>
+                </#list>
+        </select>
         </div>
     </div>
 
@@ -154,22 +81,95 @@
         <div class="form-group">
             <label class="form-label">Корпус:</label>
             <select class="form-select" name="corps" required>
-                <option value=1>Центральний корпус</option>
-                <option value=2>Гуманітарний корпус</option>
+                <option value=1<#if lesson.corps() == 1> selected</#if>>Центральний корпус</option>
+                <option value=2<#if lesson.corps() == 2> selected</#if>>Гуманітарний корпус</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-label">Аудиторія:</label>
-            <input class="form-input" type="number" name="cabinet" required>
+            <input class="form-input" type="number" name="cabinet" value="${lesson.cabinet()}" required>
         </div>
     </div>
     <div class="form-action-buttons">
-        <button class="btn save-btn" type="submit" formaction="add">Зберегти</button>
+        <button class="btn save-btn small-save-btn" formaction="add">Зберегти</button>
+        </form>
+        <form method="get">
+            <input type="hidden" name="n" value="${lesson.number()}">
+            <button class="btn delete-btn" formaction="remove">Видалити</button>
+        </form>
     </div>
-</form>
-</div>
-</#if>
-</div>
-</main>
-</body>
-</html>
+    </#list>
+    </#if>
+
+    <form action="" method="post" class="lesson-form">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <div class="form-row">
+        <div class="form-group">
+            <label class="form-label">Номер пари:</label>
+            <select class="form-select short-select" name="number" required>
+                <#list numbers as n>
+                <option value=${n}>${n} пара</option>
+            </#list>
+            </select>
+        </div></div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Предмет:</label>
+                <input class="form-input" type="text" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Формат:</label>
+                <select class="form-select" name="type" required>
+                    <option value="Лекція">Лекція</option>
+                    <option value="Практична">Практична</option>
+                    <option value="Екзамен">Екзамен</option>
+                    <option value="Семінар">Семінар</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="teacher-fields">
+        <div class="form-label">Викладач:</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Ім'я:</label>
+                <input class="form-input" type="text" name="teacher_name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Прізвище:</label>
+                <input class="form-input" type="text" name="teacher_surname" required>
+            </div>
+        </div>
+            <div class="form-group">
+                <label class="form-label">Факультет:</label>
+                <select class="form-select" name="teacher_faculty" required>
+                    <#list faculties as f>
+                    <option value="${f}">${f}</option>
+                </#list>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Корпус:</label>
+                <select class="form-select" name="corps" required>
+                    <option value=1>Центральний корпус</option>
+                    <option value=2>Гуманітарний корпус</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Аудиторія:</label>
+                <input class="form-input" type="number" name="cabinet" required>
+            </div>
+        </div>
+        <div class="form-action-buttons">
+            <button class="btn save-btn" type="submit" formaction="add">Зберегти</button>
+        </div>
+    </form>
+    </div>
+    </#if>
+    </div>
+    </main>
+    </body>
+    </html>
