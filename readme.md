@@ -53,10 +53,7 @@ For student:
 - GET /schedule/student/week/next(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the next week(or on the n-th week after this, optional)
 - GET /schedule/student/week/last(?group_id={group_id})(&n={number_of_week}) - Get schedule catalog on the last week(or on the n-th week before this, optional)
 - GET /schedule/student/day(?group={group_id}&date={date}): Get page of schedule for the selected group_id on the selected date(by defalult is today date and default user group)
-
-For teacher:
-- GET /schedule/student/day(?group={group_id}&date={date}): Get page of schedule for the selected group_id on the selected date(by defalult is today date and default user group)
-
+  
 For teacher:
 - GET /teacher?name={name}&surname={surname}: Find teacher by name and surname and get teacher_id
 - GET /schedule/teacher - Get schedule of teacher on today(Only if user is teacher)
@@ -66,9 +63,6 @@ For teacher:
 - GET /schedule/teacher/week?date={date} - Get schedule catalog for week which includes selected date
 - GET /schedule/teacher/week/next(?id={teacher_id})(&n={number_of_week}) - Get schedule catalog on the next week(or on the n-th week after this, optional)
 - GET /schedule/teacher/week/last(?id={teacher_id})(&n={number_of_week}) - Get schedule catalog on the last week(or on the n-th week before this, optional)
-- GET /schedule/teacher/day(?id={teacher_id}&date={date}): Get page of schedule for the selected teacher_id on the selected date(by defalult is today date)
-
-Account:
 - GET /schedule/teacher/day(?id={teacher_id}&date={date}): Get page of schedule for the selected teacher_id on the selected date(by defalult is today date)
 
 Account:
